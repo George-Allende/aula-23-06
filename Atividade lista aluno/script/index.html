@@ -1,0 +1,60 @@
+ <!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="script/sla.js"></script>
+</head>
+
+<body style="text-align: center; font-family: sans-serif;">
+    <h2>Adicione O Nome Do Aluno</h2>
+
+    <button onclick="addAluno()">Adicionar Aluno</button>
+    <button onclick="delAlluno()">Apagar Aluno</button>
+    <input type="text" id="nomealuno" placeholder="digite o nome do aluno">
+    <br><br>
+    <ul id="lista-aluno"></ul>
+
+    <script>
+
+        let alunos = []
+        function addAluno() {
+            const input = document.getElementById("nomealuno")
+            if (input.value !== "") {
+
+                let existe = alunos.includes(input.value)
+                if (existe == false) {
+                    alunos.push(input.value)
+                }
+
+                atualizarLista()
+                input.value = ""
+            } else { 
+                alert("Nome invalido")
+            }
+
+        }
+        function atualizarLista() {
+            const listaAluno = document.getElementById("lista-aluno")
+            listaAluno.innerHTML = ""
+            for (let i = 0; i < alunos.length; i++) {
+                let lista = document.createElement("li")
+                lista.textContent = alunos[i]
+                listaAluno.appendChild(lista)
+            }
+        }
+
+        function delAlluno() {
+
+            let nome = prompt("Digite o nome")
+            let indice = alunos.indexOf(nome)
+            remover = alunos.splice(indice, 1)
+            atualizarLista()
+        }
+
+    </script>
+</body>
+
+</html>
